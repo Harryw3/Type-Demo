@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Test</title>
+  <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+</head>
+
+<body>
+  <form id="input-form">
+    <input type="text" id="input-field" placeholder="Type here">
+    <input type="submit" value="Submit">
+  </form>
+  <span id="output"></span>
+
+  <script>
+    var inputForm = document.getElementById('input-form');
+    var inputField = document.getElementById('input-field');
+    var outputElement = document.getElementById('output');
+    var typed; // Initialize Typed.js instance variable
+
+    inputForm.addEventListener('submit', function (event) {
+      event.preventDefault(); // Prevent form submission
+      var inputValue = inputField.value;
+      // Initialize Typed.js instance
+      if (typed) {
+        typed.destroy();
+      }
+      typed = new Typed('#output', {
+        strings: [inputValue],
+        typeSpeed: 100,
+        loop: true,
+        loopCount: Infinity,
+        backSpeed: 100,
+        startDelay: 500,
+
+      });
+    });
+
+    inputField.addEventListener('input', function () {
+      var inputValue = inputField.value;
+      // If the input field is empty, destroy the Typed.js instance
+      if (!inputValue.trim() && typed) {
+        typed.destroy();
+      }
+    });
+  </script>
+
+</body>
+
+</html>
